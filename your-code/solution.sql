@@ -42,10 +42,12 @@ ORDER BY Total DESC
 LIMIT 3;
 
 -- CHALLENGE 4 
-SELECT A.au_id AS 'Author ID', au_lname AS 'Last name', au_fname AS 'First Name', SUM(sales.qty) AS 'Total'
+SELECT A.au_id AS 'Author ID', au_lname AS 'Last name', au_fname AS 'First Name', COALESCE(SUM(sales.qty), 0) AS 'Total'
 FROM authors AS A
 LEFT JOIN titleauthor USING (au_id)
 LEFT JOIN titles USING (title_id)
 LEFT JOIN sales USING (title_id)
 GROUP BY A.au_id, A.au_lname, A.au_fname
-ORDER BY Total DESC
+ORDER BY Total DESC;
+
+
